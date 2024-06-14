@@ -28,7 +28,6 @@ export default class ItemForm extends React.Component {
       category : props.item ? props.item.category : '',
       brand : props.item ? props.item.brand : '',
       hasBrand : props.item ? props.item.hasBrand : false,
-      description: props.item ? props.item.description : '',
       amount: props.item ? props.item.amount : 0,//check later
       // amount: JSON.stringify(w),//check later
       unit : props.item ? props.item.unit : '',
@@ -44,9 +43,6 @@ export default class ItemForm extends React.Component {
   //on-change functions
   chName = (name) => {
     this.setState(() => ({ name }));
-  };
-  chDescription = (description) => {
-    this.setState(() => ({ description }));
   };
   chAmount = (amount) => {
     this.setState(() => ({ amount }));
@@ -67,7 +63,6 @@ export default class ItemForm extends React.Component {
       this.setState(() => ({ error: '' }));
       const item={
         name: this.state.name,
-        description: this.state.description,
         amount: this.state.amount,
         createdAt: this.state.createdAt.valueOf(),
       };
@@ -82,10 +77,7 @@ export default class ItemForm extends React.Component {
           value={this.state.name}
           onChangeText= {this.chName}
         />
-        {/* <FormInput placeholder='Description' label='Description: '
-          value={this.state.description}
-          onChangeText= {this.chDescription}
-        /> */}
+
         <FormInput placeholder='Amount' label='Amount: '
           value={this.state.amount}
           inputMode='decimal'
