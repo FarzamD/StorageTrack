@@ -41,3 +41,10 @@ export const editItem = (id, updates) => ({
   id,
   updates
 });
+
+// saving the loaded store from saved file into store
+// Action creator:
+export const loadStore = (state) => ({
+  type: 'LOAD_STORE',
+  payload: state
+});

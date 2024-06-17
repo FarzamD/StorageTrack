@@ -83,25 +83,13 @@ export default class ItemForm extends React.Component {
           inputMode='decimal'
           onChangeText= {this.chAmount}
         />
-        <InputChoice label={'Brand: '} items={brandsg}
+        {/* <InputChoice label={'Brand: '} items={brandsg}
           style={styles.inputChoice}
           onChange={(val)=>Alert.alert('title',JSON.stringify(val))}
           placeholder={'select brand'}
-        />
-        {/* <InputTextChoice label={'Expire in:'} items={expireses}
-          onChange={this.chExp_mode}
-          defaultValue={'d'}
-          inputMode='decimal'
-          onChangeText= {this.chExp}
         /> */}
-        <Expiration zIndex={1} onChange={this.chExp}/>
-        {/* <InputTextChoice label={'Consumption:'} items={rateses}
-          onChange={this.chExp_mode}
-          defaultValue={'d'}
-          inputMode='decimal'
-          onChangeText= {this.chExp}
-        /> */}
-        <Consumption1 onChange={this.chCons}/>
+        {/* <Expiration zIndex={1} onChange={this.chExp}/> */}
+        {/* <Consumption1 onChange={this.chCons}/> */}
         {/* <Consumption/> */}
         <Button style={styles.but} title='Add Item' onPress={this.onSubmit}/>
       </View>

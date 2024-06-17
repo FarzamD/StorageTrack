@@ -9,6 +9,8 @@ export default (state = [], action) => {
       ];
     case 'REMOVE_ITEM':
       return state.filter(({ id }) => id !== action.id);
+    case 'LOAD_STORE':
+      return action.payload.items || state;
     case 'EDIT_ITEM':
       return state.map((item) => {
         if (item.id === action.id) {
