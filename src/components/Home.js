@@ -19,7 +19,7 @@ const Home= (props)=>{
     //update items when store changes
     useEffect(()=>{
             setComponentItems(items);
-            Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
+            // Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
 
         }, [items]
     );

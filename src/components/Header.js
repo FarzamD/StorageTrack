@@ -5,12 +5,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Header = (props) => {
     const [page, setPage] = useState(props.headers[0]);
-
+    openSetting=()=>{
+        Alert.alert('setting','comming soon')
+    }
     return (
     <View style={defaultStyles.container}>
         <View style={defaultStyles.top}>
             <H1 style={defaultStyles.h1}>StorageTrack</H1>
-            <FontAwesome size={25} onPress={()=>Alert.alert('setting','comming soon')} name='gear' style={defaultStyles.icon}/>
+            <FontAwesome size={25} onPress={openSetting} name='gear' style={defaultStyles.icon}/>
         </View>
         <View style={defaultStyles.headers}>
             {props.headers.map( (header,i)=>

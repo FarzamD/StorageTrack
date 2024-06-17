@@ -55,7 +55,7 @@ const App = () => {
 	const selectPage = (val) => {
 		setPage(val);
 		if (page==='Home') {
-			Alert.alert('App store',JSON.stringify(items.map(item=>item.name)))			
+			// Alert.alert('App store',JSON.stringify(items.map(item=>item.name)))			
 		}
 	};
   
