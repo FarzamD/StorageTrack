@@ -18,6 +18,7 @@ import Header from './src/components/Header';
 import Home from './src/components/Home';
 import ThirdPage from './src/components/ThirdPage';
 import { getStoreFromFile,listDir,loadStoreFromFile, fileExists } from './src/components/fs/fileFunctions';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const h= StatusBar.currentHeight;
 const headers=['Home', 'Add Item', 'Third page'];
@@ -74,15 +75,30 @@ const App = () => {
 			return <ThirdPage/>
 		}
 	};
-  
+
+	swipeLeft=()=>{
+		const i = headers.indexOf(page);
+		if (i<headers.length-1) {
+			selectPage(headers[i+1]);			
+		}
+	}
+	swipeRight=()=>{
+		const i = headers.indexOf(page);
+		if (i>0) {
+			selectPage(headers[i-1]);			
+		}
+	}
 	return (
 	  <>
 		<View style={{ height: h }}></View>
-		<Header selectPage={ selectPage} headers={headers} />
-		<View style={styles.container}>
-			{/* {pages[page]} */}
-			{pages2(page)}
-		</View>
+		<Header selectPage={ selectPage} headers={headers} page={page}/>
+		<GestureRecognizer 
+			style={styles.container}
+			onSwipeLeft={swipeLeft}
+			onSwipeRight={swipeRight}>
+				{/* {pages[page]} */}
+				{pages2(page)}
+		</GestureRecognizer>
 	  </>
 	);
   };
