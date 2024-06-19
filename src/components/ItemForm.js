@@ -45,7 +45,7 @@ export default class ItemForm extends React.Component {
     this.setState(() => ({ name }));
   };
   chAmount = (amount) => {
-    this.setState(() => ({ amount }));
+    this.setState(() => ({ amount: parseInt(amount) }));
   };
   chExp= (expiration)=>{
     this.setState(() => ({ expiration }));

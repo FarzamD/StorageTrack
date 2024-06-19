@@ -5,10 +5,23 @@
 // } else {Alert.alert('system theme is',JSON.stringify(Appearance.getColorScheme()));}
 
 // test codes goes above
+// TASKs:
+// theme (detect, set app theme)
+// OS
 
+// Animation libs:
+// https://www.youtube.com/watch?v=8CZy6DjDXK0
+// react-native-reanimated : modified Animated API
+// moti: modified react-native APIs
+// marquee:  moving text
+// react-native-lotti: AE animations
+// react-native-skottie : modified lotti to use GPU instead of CPU(smoother/faster)
+// +5 more
+
+// check later: react useTransition hook
 
 // import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, StatusBar, Text,View, Alert, SafeAreaView, Platform,ActivityIndicator  } from 'react-native';
+import { StyleSheet, StatusBar,View, Alert, SafeAreaView, Platform, Animated  } from 'react-native';
 import {useState, useEffect } from 'react'
 import AddItem from './src/components/AddItem';
 import store from './src/redux/store/configureStore';
@@ -26,28 +39,27 @@ const OS= Platform.OS;//"ios","android"
 // wrap ios in SafeAreaView
 const App = () => {
 	const [page, setPage] = useState('Home');
-	// const items= useSelector(state=> state.items)
 	let storeItems= useSelector(state=> state.items)
 	const [items, setItems]= useState([]);
 	const dispatch = useDispatch();
-	// const savedItems= getStoreFromFile();
-	//on Component mount
-    useEffect( ()=>{
-        // Alert.alert('App','App mounted');
-		const mountStore= async()=>{
-			const exists= await fileExists('store.json');
-			if (exists) {
-				// const fileItems= await loadStoreFromFile(dispatch);
-				const fileItems= await getStoreFromFile();
-				Alert.alert('fileItems',JSON.stringify(fileItems.items.map(item=>item.name)))
-				storeItems= fileItems.items;
-				// setItems(store.getState().items? store.getState().items: fileItems)				
-			}
-		}
-		mountStore()
-		// Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
+	
 
-	},[])
+	//on Component mount
+    // useEffect( ()=>{
+    //     // Alert.alert('App','App mounted');
+	// 	const mountStore= async()=>{
+	// 		const exists= await fileExists('store.json');
+	// 		if (exists) {
+	// 			const fileItems= await getStoreFromFile();
+	// 			Alert.alert('fileItems',JSON.stringify(fileItems.items.map(item=>item.name)))
+	// 			storeItems= fileItems.items;
+	// 			// setItems(store.getState().items? store.getState().items: fileItems)				
+	// 		}
+	// 	}
+	// 	// mountStore()
+	// 	// Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
+
+	// },[])
 	//on Component mount
 	useEffect( ()=>{
 		setItems(storeItems)
@@ -61,7 +73,7 @@ const App = () => {
 	};
   
 	const pages = {
-		'Home': <Home items={items} />,
+		'Home': <Home items={storeItems} />,
 		'Add Item': <AddItem />,
 		// 'Third page': <Text style={{ color: '#f9a090' }}>{'coming soon'}</Text>
 		'Third page': <ThirdPage/>

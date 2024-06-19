@@ -36,6 +36,7 @@ export const getStoreFromFile= async ()=>{
 	  return storeState;
     } catch (error) {
       console.error('Error loading store from file:', error);
+      Alert.alert('Error loading store from file:', error)
     }
 };
    

@@ -17,7 +17,7 @@ const saveStoreToFile = async (store) => {
 };
 
 const styles = StyleSheet.create({
-  h1:{color:'#FFF'}
+  h1:{color:'#FFF'},
 })
 const AddItemPage = (props) => (
   <View>

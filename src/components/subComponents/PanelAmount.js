@@ -4,10 +4,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default (props)=> {
     decrease=()=>{
-        Alert.alert()
+        props.onChange(-1)
     }
     increase=()=>{
-        Alert.alert()
+        props.onChange(+1)
     }
     return (
     <View style={{...defaultStyles.container, ...props.styles}}>
@@ -18,6 +18,7 @@ export default (props)=> {
         <FontAwesome name='minus' onPress={decrease} style={defaultStyles.iconMinus}/>
     </View>
 )}
+const p =7;//p>10
 const defaultStyles = StyleSheet.create({
     container:{
         flexDirection: 'row', 
@@ -30,18 +31,20 @@ const defaultStyles = StyleSheet.create({
     num:{
         color:'#F0F0F0',
         borderRadius:10,
-        paddingHorizontal:15,
+        paddingHorizontal:10-p,
         paddingBottom:4
     },
     iconPlus:{
         // color:'#87cf74',
         color:'#f0f0f0',
-        alignSelf:'center'
+        alignSelf:'center',
+        padding:p
     },
     iconMinus:{
         // color:'#ff8f91',
         color:'#f0f0f0',
         alignSelf:'center',
-        paddingBottom:2
+        padding:p,
+        paddingBottom:p+2
     },
 });

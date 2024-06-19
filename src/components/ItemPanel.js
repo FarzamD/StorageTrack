@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View , Dimensions, Alert} from 'react-native';
 import PanelAmount from './subComponents/PanelAmount';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,14 +9,24 @@ const w= parseInt(screenWidth* .6)
 
 const ItemPanel = (props) =>{
     const item= props.item;
-    const {name, amount}= item;
+    const {name, id}= item;
+    const [ amount , setAmount]= useState(item.amount)
     remove=()=>{
+        const deleteItem=()=>{
+            console.log(`removed ${amount}x ${name}`)
+            props.del(id)
+        }
         Alert.alert(`Delete ${name}?`,'are you sure you want to delete '+name+' ?',[
-            { text: 'Yes', onPress: ()=> console.log('delete '+name)},
             { text: 'No', onPress: ()=> console.log("don't delete "+name)},
-        ]
-    
-        )
+            { text: 'Yes', onPress: deleteItem },
+        ])
+    }
+    changeAmount=(ch)=>{
+        const newAmount= amount+ch;
+        // alert(`${name} amount changed from ${amount} to ${newAmount}`)
+        setAmount(newAmount)
+        action={id, updates:{amount:newAmount}}
+        props.onChange(action)
     }
     return (
         <View style={defaultStyles.container}>
@@ -26,7 +36,7 @@ const ItemPanel = (props) =>{
             </View>
             <View style={defaultStyles.row}>
                 <Text style={defaultStyles.exp}>expires in 5 days</Text>
-                <PanelAmount label={name}>{amount}</PanelAmount>
+                <PanelAmount onChange={changeAmount} label={name}>{amount}</PanelAmount>
             </View>
         </View>
 )};
