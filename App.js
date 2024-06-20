@@ -32,6 +32,7 @@ import Home from './src/components/Home';
 import ThirdPage from './src/components/ThirdPage';
 import { getStoreFromFile,listDir,loadStoreFromFile, fileExists } from './src/components/fs/fileFunctions';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { setStoreItems } from './src/redux/actions/items';
 
 const h= StatusBar.currentHeight;
 const headers=['Home', 'Add Item', 'Third page'];
@@ -45,22 +46,24 @@ const App = () => {
 	
 
 	//on Component mount
-    // useEffect( ()=>{
-    //     // Alert.alert('App','App mounted');
-	// 	const mountStore= async()=>{
-	// 		const exists= await fileExists('store.json');
-	// 		if (exists) {
-	// 			const fileItems= await getStoreFromFile();
-	// 			Alert.alert('fileItems',JSON.stringify(fileItems.items.map(item=>item.name)))
-	// 			storeItems= fileItems.items;
-	// 			// setItems(store.getState().items? store.getState().items: fileItems)				
-	// 		}
-	// 	}
-	// 	// mountStore()
-	// 	// Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
+    useEffect( ()=>{
+        // Alert.alert('App','App mounted');
+		const mountStore= async()=>{
+			const exists= await fileExists('store.json');
+			if (exists) {
+				const storeState= await getStoreFromFile();
+				const fileItems= storeState.items;
+				Alert.alert('fileItems',JSON.stringify(fileItems.map(item=>item.name)))
+				// setItems(store.getState().items? store.getState().items: fileItems)
+				dispatch(setStoreItems(fileItems))
+			}
+		}
+		
+		mountStore()
+		// Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
 
-	// },[])
-	//on Component mount
+	},[])
+	//on Component mount & store items change
 	useEffect( ()=>{
 		setItems(storeItems)
 	},[storeItems])

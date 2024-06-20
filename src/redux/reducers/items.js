@@ -23,8 +23,6 @@ const getDefault= ()=>{
 }
 // alert(JSON.stringify(await getDefault()))
 // Items Reducer
-const itemNames= getDefault()
-alert(JSON.stringify(itemNames))
 const itemsReducer=  (state =  [], action) => {
   switch (action.type) {
     case 'ADD_ITEM':
@@ -35,7 +33,9 @@ const itemsReducer=  (state =  [], action) => {
     case 'REMOVE_ITEM':
       return state.filter(({ id }) => id !== action.id);
     case 'LOAD_STORE':
-      return action.payload.items || state;
+      return action.items || state;
+    case 'SET_ITEMS':
+      return action.items || state;
     case 'EDIT_ITEM':
       return state.map((item) => {
         if (item.id === action.id) {

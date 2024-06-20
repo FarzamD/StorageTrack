@@ -46,5 +46,11 @@ export const editItem = (id, updates) => ({
 // Action creator:
 export const loadStore = (state) => ({
   type: 'LOAD_STORE',
-  payload: state
+  items: state.items
+});
+
+// SET_ITEMS
+export const setStoreItems = (items) => ({
+  type: 'SET_ITEMS',
+  items
 });
