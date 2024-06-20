@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import { Alert } from 'react-native';
+import { loadStore } from '../../redux/actions/items';
 
 export const listDir= async ()=>{
     const path=`${FileSystem.documentDirectory}`;

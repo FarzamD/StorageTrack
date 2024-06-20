@@ -9,17 +9,19 @@ const Header = (props) => {
         Alert.alert('setting','comming soon')
     }
     return (
-    <View style={defaultStyles.container}>
-        <View style={defaultStyles.top}>
-            <H1 style={defaultStyles.h1}>StorageTrack</H1>
-            <FontAwesome size={25} onPress={openSetting} name='gear' style={defaultStyles.icon}/>
+    <View style={styles.container}>
+        {/* top: Header + icon */}
+        <View style={styles.top}>
+            <H1 style={styles.h1}>StorageTrack</H1>
+            <FontAwesome size={25} onPress={openSetting} name='gear' style={styles.icon}/>
         </View>
-        <View style={defaultStyles.headers}>
+        {/* headers: page headers */}
+        <View style={styles.headers}>
             {props.headers.map( (header,i)=>
-                <View style={header===props.page && {borderBottomColor:'#b3f6ff',borderBottomWidth:2}} key={i}>
+                <View style={header===props.page && styles.selectedPage} key={i}>
                     <Text 
                         onPress={()=>{props.selectPage(header)}}
-                        style={header===props.page?defaultStyles.page: defaultStyles.txt}
+                        style={header===props.page?styles.page: styles.txt}
                         key={i}>{header}</Text>
                 </View>
             )}
@@ -28,9 +30,10 @@ const Header = (props) => {
     </View>
 )};
 
-const defaultStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#222831',
+        backgroundColor: '#1f252e',
+        paddingBottom:10,
         // justifyContent: 'center',
         // alignItems: 'center'
     },
@@ -59,6 +62,16 @@ const defaultStyles = StyleSheet.create({
         marginHorizontal:10,
         justifyContent: 'space-around'
     },
+    // styles of selected page header container
+    selectedPage:[{
+        backgroundColor:'#222831',
+        borderBottomColor:'#b3f6ff',
+        borderBottomWidth:2,},
+        {shadowColor: '#b3f6ff',
+        elevation:5,
+        shadowOffset:{width: -20, height:50 },
+        shadowRadius:10,}
+    ],
     txt:{    
         color:'#F0F0F0',
         padding:4,

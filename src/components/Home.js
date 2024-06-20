@@ -10,10 +10,10 @@ const Home= (props)=>{
     const dispatch= useDispatch();
 
     //test useEffect on Component mount
-    useEffect(()=>{
-        // Alert.alert('Home component','Home component mounted')
-        Alert.alert('props.items',JSON.stringify(props.items))
-    },[])
+    // useEffect(()=>{
+    //     // Alert.alert('Home component','Home component mounted')
+    //     Alert.alert('props.items',JSON.stringify(props.items))
+    // },[])
 
     //state to hold items for component
     const [componentItems, setComponentItems] = useState(props.items);
