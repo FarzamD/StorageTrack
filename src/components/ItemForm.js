@@ -32,6 +32,7 @@ export default class ItemForm extends React.Component {
       // amount: JSON.stringify(w),//check later
       unit : props.item ? props.item.unit : '',
       consumptionRate : props.item ? props.item.consumptionRate : 0,
+      hasExp: props.item ? props.item.hasExp : false,
       expiration : props.item ? props.item.expiration : 0,
       createdAt: props.item ? moment(props.item.createdAt) : moment(),
       error: '',
@@ -47,8 +48,9 @@ export default class ItemForm extends React.Component {
   chAmount = (amount) => {
     this.setState(() => ({ amount: parseInt(amount) }));
   };
-  chExp= (expiration)=>{
-    this.setState(() => ({ expiration }));
+  chExp= (hasExp,maxExp)=>{
+    const expiration= this.state.createdAt.clone().add(maxExp,'d')
+    this.setState(() => ({ hasExp,maxExp,expiration }));
   }
   chCons=(consumptionRate)=>{
     this.setState(() => ({ consumptionRate }));
@@ -64,6 +66,8 @@ export default class ItemForm extends React.Component {
       const item={
         name: this.state.name,
         amount: this.state.amount,
+        hasExp: this.state.hasExp,
+        expiration: this.state.expiration,
         createdAt: this.state.createdAt.valueOf(),
       };
       this.props.onSubmit(item);
@@ -88,7 +92,8 @@ export default class ItemForm extends React.Component {
           onChange={(val)=>Alert.alert('title',JSON.stringify(val))}
           placeholder={'select brand'}
         /> */}
-        {/* <Expiration zIndex={1} onChange={this.chExp}/> */}
+        <Expiration zIndex={1} onChange={this.chExp}/>
+        {/* <Expiration/> */}
         {/* <Consumption1 onChange={this.chCons}/> */}
         {/* <Consumption/> */}
         <Button style={styles.but} title='Add Item' onPress={this.onSubmit}/>
@@ -123,5 +128,3 @@ const styles = StyleSheet.create({
   }
 });
 // Accent Color: #00BCD4 (Teal) - A vibrant color for highlights and calls to action.
- 
-

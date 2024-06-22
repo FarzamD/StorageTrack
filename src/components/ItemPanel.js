@@ -3,14 +3,22 @@ import { StyleSheet, Text, View , Dimensions, Alert} from 'react-native';
 import PanelAmount from './subComponents/PanelAmount';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import H1 from './subComponents/H1';
+import moment from 'moment';
 
 const screenWidth = Dimensions.get('screen').width 
 const w= parseInt(screenWidth* .6)
 
 const ItemPanel = (props) =>{
     const item= props.item;
-    const {name, id}= item;
+    const {name, id,hasExp,expiration}= item;
     const [ amount , setAmount]= useState(item.amount)
+    // aux funcs
+    tillExp=(exp=expiration)=>{
+        const now = moment().startOf('day');
+        const days = Math.floor(moment.duration(exp - now).asDays());
+        return days
+    }
+    // event handlers
     remove=()=>{
         const deleteItem=()=>{
             console.log(`removed ${amount}x ${name}`)
@@ -35,7 +43,7 @@ const ItemPanel = (props) =>{
                 <FontAwesome name='trash-o' size={16} onPress={remove} style={defaultStyles.icon} />
             </View>
             <View style={defaultStyles.row}>
-                <Text style={defaultStyles.exp}>expires in 5 days</Text>
+                <Text style={defaultStyles.exp}>{hasExp && `expires in ${tillExp()} days`}</Text>
                 <PanelAmount onChange={changeAmount} label={name}>{amount}</PanelAmount>
             </View>
         </View>

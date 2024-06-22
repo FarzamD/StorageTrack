@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import DropDown from './Dropdown';
 import { StyleSheet, Text, View, Alert,Dimensions, TextInput} from 'react-native';
+import InputTextChoice from './InputTextChoice';
 
 export default (props)=> {
     const [val, setVal] = useState(props.value);
@@ -11,21 +12,23 @@ export default (props)=> {
     }
     return (
     <View style={{...defaultStyles.container, ...props.style}}>
-        <Text style={defaultStyles.label}>{props.label}</Text>
-        <TextInput style={defaultStyles.inp}
-            placeholder={props.placeholder1}
-            placeholderTextColor={defaultStyles.placeholder.color}
-            value={val}
-            onChangeText= {chText}
-            inputMode={props.inputMode}
-          />
-        <DropDown items={props.items}
-          onChange={props.onChange}
-          placeholder = {props.placeholder2}
+        <DropDown items={props.items1}
+          onChange={props.onChange1}
+          placeholder = {props.placeholder0}
           //styles
           style={defaultInpStyles.style}
-          containerStyle= {defaultInpStyles.container}
-          defaultValue={props.defaultValue}
+          containerStyle= {defaultInpStyles.container1}
+          defaultValue={props.defaultValue1}
+        />
+        <InputTextChoice label={props.label} items={props.items}
+          onChange={props.onChange2}
+          defaultValue={props.defaultValue2}
+          value={val}
+          placeholder1 = {props.placeholder1}
+          placeholder2 = {props.placeholder2}
+          inputMode={props.inputMode}
+          onChangeText= {chText}
+        //   style
         />
     </View>
 )}
@@ -41,6 +44,10 @@ const defaultInpStyles= StyleSheet.create({
 
         textAlign:'right'
         },
+    container:{
+        width:parseInt(w*2.5),
+        // zIndex:1,
+    },
     container:{
         width:w,
         // zIndex:1,

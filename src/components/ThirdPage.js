@@ -23,7 +23,10 @@ export default class ThirdPage extends React.Component{
         // alert(JSON.stringify(val2))
         this.setState(()=>{val2})
     }
-    onSubmit3= async ()=>{
+    // onSubmit3= async ()=>{
+    //     Alert.alert('Save store','store saved')
+    // }
+    onSubmit4= async ()=>{
         deleteCache();
         Alert.alert('Delete','both cache files deleted')
     }
@@ -35,7 +38,8 @@ export default class ThirdPage extends React.Component{
         <Button style={styles.but} title='save to file' onPress={this.onSubmit}/>
         <Text style={styles.label}>{this.state.val2}</Text>
         <Button style={styles.but} title='load from file' onPress={this.onSubmit2}/>
-        <Button style={styles.but} title='Delete store cache' onPress={this.onSubmit3}/>
+        {/* <Button style={styles.but} title='save store' onPress={this.onSubmit3}/> */}
+        <Button style={styles.but} title='Delete store cache' onPress={this.onSubmit4}/>
 
     </>)}
 };

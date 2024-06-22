@@ -34,6 +34,9 @@ import { getStoreFromFile,listDir,loadStoreFromFile, fileExists } from './src/co
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { setStoreItems } from './src/redux/actions/items';
 
+// to save store to file:
+// 1: import saveFile from fs/fileFunctions
+// 2: saveFile(store, 'store') in event handler (no async, no await)
 const h= StatusBar.currentHeight;
 const headers=['Home', 'Add Item', 'Third page'];
 const OS= Platform.OS;//"ios","android"
@@ -49,10 +52,11 @@ const App = () => {
     useEffect( ()=>{
         // Alert.alert('App','App mounted');
 		const mountStore= async()=>{
-			const exists= await fileExists('store.json');
+			const exists= await fileExists('storeItems.json');
 			if (exists) {
-				const storeState= await getStoreFromFile();
-				const fileItems= storeState.items;
+				// const storeState= await getStoreFromFile();
+				// const fileItems= storeState.items;
+				const fileItems= await getStoreFromFile();
 				Alert.alert('fileItems',JSON.stringify(fileItems.map(item=>item.name)))
 				// setItems(store.getState().items? store.getState().items: fileItems)
 				dispatch(setStoreItems(fileItems))

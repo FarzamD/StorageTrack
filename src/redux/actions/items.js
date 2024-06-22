@@ -10,6 +10,7 @@ export const addItem = (
     amount = 0,
     unit = '',
     consumptionRate = 0,
+    hasExp = false,
     expiration = 0,
     createdAt = 0
   } = {}
@@ -24,6 +25,7 @@ export const addItem = (
     amount,
     unit,
     consumptionRate,
+    hasExp,
     expiration,
     createdAt
   }
@@ -53,4 +55,10 @@ export const loadStore = (state) => ({
 export const setStoreItems = (items) => ({
   type: 'SET_ITEMS',
   items
+});
+
+// SAVE_ITEMS
+export const saveStoreItems= (fileUri)=>({
+  type: 'SAVE_ITEMS',
+  fileUri
 });

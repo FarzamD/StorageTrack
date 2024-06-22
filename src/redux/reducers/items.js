@@ -1,27 +1,3 @@
-//default items
-import { Alert } from "react-native";
-import { fileExists, getStoreFromFile } from "../../components/fs/fileFunctions";
-// const exists= await fileExists('store.json');
-const getDefault= ()=>{
-  
-  let defaultItems=[]
-  const def= async ()=>{
-    const exists= await fileExists('store.json');
-    // alert(JSON.stringify(exists))
-    if (exists) {
-      const fileItems= await getStoreFromFile();
-      // Alert.alert('getStoreFromFile', 'getStoreFromFile  succesful')
-      const items= fileItems.items;
-      const itemNames= items.map(item=>item.name)
-      // Alert.alert('getStoreFromFile  succesful',JSON.stringify(itemNames))
-      defaultItems=itemNames;
-      Alert.alert('setting defaultItems to',JSON.stringify(itemNames))
-    }
-  }
-  def();
-  return defaultItems;
-}
-// alert(JSON.stringify(await getDefault()))
 // Items Reducer
 const itemsReducer=  (state =  [], action) => {
   switch (action.type) {

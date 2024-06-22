@@ -29,7 +29,7 @@ export const loadStoreFromFile = () => {
 };
 // home page functions
 export const getStoreFromFile= async ()=>{
-    const fileUri = `${FileSystem.documentDirectory}store.json`;
+    const fileUri = `${FileSystem.documentDirectory}storeItems.json`;
     try {
       const fileContent = await FileSystem.readAsStringAsync(fileUri);
       const storeState = JSON.parse(fileContent);
@@ -40,10 +40,10 @@ export const getStoreFromFile= async ()=>{
       Alert.alert('Error loading store from file:', error)
     }
 };
-   
+
 // third page funcs
-export const saveFile = async (file) => {
-    const fileUri = `${FileSystem.documentDirectory}test.json`;
+export const saveFile = async (file, path='test') => {
+    const fileUri = `${FileSystem.documentDirectory}${path}.json`;
     try {
       await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(file));
       alert('Store saved successfully to:'+ fileUri);
@@ -71,4 +71,9 @@ export const deleteCache= async()=>{
     const fileUri = `${FileSystem.documentDirectory}test.json`;
     await FileSystem.deleteAsync(fileUri1);
     await FileSystem.deleteAsync(fileUri);
+}
+// testing functions
+export const cloAlert= (title, text)=>{
+    console.log(title+' : ')
+    console.log(text)
 }

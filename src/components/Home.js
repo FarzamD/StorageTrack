@@ -3,6 +3,7 @@ import ItemPanel from './ItemPanel';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Alert } from 'react-native';
 import { editItem, removeItem } from '../redux/actions/items';
+import moment from 'moment';
 
 const Home= (props)=>{
     //get items from store
@@ -23,9 +24,14 @@ const Home= (props)=>{
             // Alert.alert('store',JSON.stringify(items.map(item=>item.name)))
         }, [items]
     );
-
+    // aux funcs
+    tillExp=(exp)=>{
+        const now = moment().startOf('day');
+        const days = Math.floor(moment.duration(exp - now).asDays());
+        return days
+    }
     // funcs
-    modifyItem=( action )=>{
+    modifyItem=async( action )=>{
         modifiedItems= componentItems.map((item)=>{
             if (item.id === action.id) {
                 return {...item, ...action.updates}
@@ -35,10 +41,12 @@ const Home= (props)=>{
         })
         setComponentItems(modifiedItems);
         // dispatch(editItem(action))
-        dispatch(editItem(action.id, action.updates))
+        await dispatch(editItem(action.id, action.updates))
+        // await dispatch(saveStoreToFile())
     }
-    deleteItem=(id)=>{
-        dispatch(removeItem({id}))
+    deleteItem=async(id)=>{
+        await dispatch(removeItem({id}))
+        // await dispatch(saveStoreToFile())
     }
 
     return (

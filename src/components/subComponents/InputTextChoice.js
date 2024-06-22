@@ -28,6 +28,8 @@ export default (props)=> {
           //styles
           style={defaultInpStyles.style}
           containerStyle= {defaultInpStyles.container}
+
+          disabled={props.disabled}
         />
     </View>
 )}

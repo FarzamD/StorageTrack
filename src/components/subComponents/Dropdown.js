@@ -31,7 +31,7 @@ export default (props) => {
             style={{...styles.style, ...props.style}}
             containerStyle={props.containerStyle}
             // dropDownContainerStyle={{zIndex:2}}
-
+            disabled={props.disabled}
             theme='DARK'
         />
     );
